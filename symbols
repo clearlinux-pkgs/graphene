@@ -14,6 +14,7 @@ libgraphene-1.0.so.0:graphene_box_get_height
 libgraphene-1.0.so.0:graphene_box_get_max
 libgraphene-1.0.so.0:graphene_box_get_min
 libgraphene-1.0.so.0:graphene_box_get_size
+libgraphene-1.0.so.0:graphene_box_get_type
 libgraphene-1.0.so.0:graphene_box_get_vertices
 libgraphene-1.0.so.0:graphene_box_get_width
 libgraphene-1.0.so.0:graphene_box_infinite
@@ -32,6 +33,7 @@ libgraphene-1.0.so.0:graphene_euler_alloc
 libgraphene-1.0.so.0:graphene_euler_equal
 libgraphene-1.0.so.0:graphene_euler_free
 libgraphene-1.0.so.0:graphene_euler_get_order
+libgraphene-1.0.so.0:graphene_euler_get_type
 libgraphene-1.0.so.0:graphene_euler_get_x
 libgraphene-1.0.so.0:graphene_euler_get_y
 libgraphene-1.0.so.0:graphene_euler_get_z
@@ -49,6 +51,7 @@ libgraphene-1.0.so.0:graphene_frustum_contains_point
 libgraphene-1.0.so.0:graphene_frustum_equal
 libgraphene-1.0.so.0:graphene_frustum_free
 libgraphene-1.0.so.0:graphene_frustum_get_planes
+libgraphene-1.0.so.0:graphene_frustum_get_type
 libgraphene-1.0.so.0:graphene_frustum_init
 libgraphene-1.0.so.0:graphene_frustum_init_from_frustum
 libgraphene-1.0.so.0:graphene_frustum_init_from_matrix
@@ -58,6 +61,7 @@ libgraphene-1.0.so.0:graphene_matrix_alloc
 libgraphene-1.0.so.0:graphene_matrix_determinant
 libgraphene-1.0.so.0:graphene_matrix_free
 libgraphene-1.0.so.0:graphene_matrix_get_row
+libgraphene-1.0.so.0:graphene_matrix_get_type
 libgraphene-1.0.so.0:graphene_matrix_get_value
 libgraphene-1.0.so.0:graphene_matrix_get_x_scale
 libgraphene-1.0.so.0:graphene_matrix_get_y_scale
@@ -120,6 +124,7 @@ libgraphene-1.0.so.0:graphene_plane_equal
 libgraphene-1.0.so.0:graphene_plane_free
 libgraphene-1.0.so.0:graphene_plane_get_constant
 libgraphene-1.0.so.0:graphene_plane_get_normal
+libgraphene-1.0.so.0:graphene_plane_get_type
 libgraphene-1.0.so.0:graphene_plane_init
 libgraphene-1.0.so.0:graphene_plane_init_from_plane
 libgraphene-1.0.so.0:graphene_plane_init_from_point
@@ -133,6 +138,7 @@ libgraphene-1.0.so.0:graphene_point3d_distance
 libgraphene-1.0.so.0:graphene_point3d_dot
 libgraphene-1.0.so.0:graphene_point3d_equal
 libgraphene-1.0.so.0:graphene_point3d_free
+libgraphene-1.0.so.0:graphene_point3d_get_type
 libgraphene-1.0.so.0:graphene_point3d_init
 libgraphene-1.0.so.0:graphene_point3d_init_from_point
 libgraphene-1.0.so.0:graphene_point3d_init_from_vec3
@@ -148,6 +154,7 @@ libgraphene-1.0.so.0:graphene_point_alloc
 libgraphene-1.0.so.0:graphene_point_distance
 libgraphene-1.0.so.0:graphene_point_equal
 libgraphene-1.0.so.0:graphene_point_free
+libgraphene-1.0.so.0:graphene_point_get_type
 libgraphene-1.0.so.0:graphene_point_init
 libgraphene-1.0.so.0:graphene_point_init_from_point
 libgraphene-1.0.so.0:graphene_point_init_from_vec2
@@ -160,6 +167,7 @@ libgraphene-1.0.so.0:graphene_quad_bounds
 libgraphene-1.0.so.0:graphene_quad_contains
 libgraphene-1.0.so.0:graphene_quad_free
 libgraphene-1.0.so.0:graphene_quad_get_point
+libgraphene-1.0.so.0:graphene_quad_get_type
 libgraphene-1.0.so.0:graphene_quad_init
 libgraphene-1.0.so.0:graphene_quad_init_from_points
 libgraphene-1.0.so.0:graphene_quad_init_from_rect
@@ -167,6 +175,7 @@ libgraphene-1.0.so.0:graphene_quaternion_alloc
 libgraphene-1.0.so.0:graphene_quaternion_dot
 libgraphene-1.0.so.0:graphene_quaternion_equal
 libgraphene-1.0.so.0:graphene_quaternion_free
+libgraphene-1.0.so.0:graphene_quaternion_get_type
 libgraphene-1.0.so.0:graphene_quaternion_init
 libgraphene-1.0.so.0:graphene_quaternion_init_from_angle_vec3
 libgraphene-1.0.so.0:graphene_quaternion_init_from_angles
@@ -193,6 +202,7 @@ libgraphene-1.0.so.0:graphene_ray_get_distance_to_plane
 libgraphene-1.0.so.0:graphene_ray_get_distance_to_point
 libgraphene-1.0.so.0:graphene_ray_get_origin
 libgraphene-1.0.so.0:graphene_ray_get_position_at
+libgraphene-1.0.so.0:graphene_ray_get_type
 libgraphene-1.0.so.0:graphene_ray_init
 libgraphene-1.0.so.0:graphene_ray_init_from_ray
 libgraphene-1.0.so.0:graphene_ray_init_from_vec3
@@ -208,6 +218,7 @@ libgraphene-1.0.so.0:graphene_rect_get_center
 libgraphene-1.0.so.0:graphene_rect_get_height
 libgraphene-1.0.so.0:graphene_rect_get_top_left
 libgraphene-1.0.so.0:graphene_rect_get_top_right
+libgraphene-1.0.so.0:graphene_rect_get_type
 libgraphene-1.0.so.0:graphene_rect_get_vertices
 libgraphene-1.0.so.0:graphene_rect_get_width
 libgraphene-1.0.so.0:graphene_rect_get_x
@@ -277,6 +288,7 @@ libgraphene-1.0.so.0:graphene_simd4x4f_transpose_in_place
 libgraphene-1.0.so.0:graphene_size_alloc
 libgraphene-1.0.so.0:graphene_size_equal
 libgraphene-1.0.so.0:graphene_size_free
+libgraphene-1.0.so.0:graphene_size_get_type
 libgraphene-1.0.so.0:graphene_size_init
 libgraphene-1.0.so.0:graphene_size_init_from_size
 libgraphene-1.0.so.0:graphene_size_interpolate
@@ -290,6 +302,7 @@ libgraphene-1.0.so.0:graphene_sphere_free
 libgraphene-1.0.so.0:graphene_sphere_get_bounding_box
 libgraphene-1.0.so.0:graphene_sphere_get_center
 libgraphene-1.0.so.0:graphene_sphere_get_radius
+libgraphene-1.0.so.0:graphene_sphere_get_type
 libgraphene-1.0.so.0:graphene_sphere_init
 libgraphene-1.0.so.0:graphene_sphere_init_from_points
 libgraphene-1.0.so.0:graphene_sphere_init_from_vectors
@@ -306,6 +319,7 @@ libgraphene-1.0.so.0:graphene_triangle_get_midpoint
 libgraphene-1.0.so.0:graphene_triangle_get_normal
 libgraphene-1.0.so.0:graphene_triangle_get_plane
 libgraphene-1.0.so.0:graphene_triangle_get_points
+libgraphene-1.0.so.0:graphene_triangle_get_type
 libgraphene-1.0.so.0:graphene_triangle_get_vertices
 libgraphene-1.0.so.0:graphene_triangle_init_from_point3d
 libgraphene-1.0.so.0:graphene_triangle_init_from_vec3
@@ -315,6 +329,7 @@ libgraphene-1.0.so.0:graphene_vec2_divide
 libgraphene-1.0.so.0:graphene_vec2_dot
 libgraphene-1.0.so.0:graphene_vec2_equal
 libgraphene-1.0.so.0:graphene_vec2_free
+libgraphene-1.0.so.0:graphene_vec2_get_type
 libgraphene-1.0.so.0:graphene_vec2_get_x
 libgraphene-1.0.so.0:graphene_vec2_get_y
 libgraphene-1.0.so.0:graphene_vec2_init
@@ -341,6 +356,7 @@ libgraphene-1.0.so.0:graphene_vec3_divide
 libgraphene-1.0.so.0:graphene_vec3_dot
 libgraphene-1.0.so.0:graphene_vec3_equal
 libgraphene-1.0.so.0:graphene_vec3_free
+libgraphene-1.0.so.0:graphene_vec3_get_type
 libgraphene-1.0.so.0:graphene_vec3_get_x
 libgraphene-1.0.so.0:graphene_vec3_get_xy
 libgraphene-1.0.so.0:graphene_vec3_get_xy0
@@ -373,6 +389,7 @@ libgraphene-1.0.so.0:graphene_vec4_divide
 libgraphene-1.0.so.0:graphene_vec4_dot
 libgraphene-1.0.so.0:graphene_vec4_equal
 libgraphene-1.0.so.0:graphene_vec4_free
+libgraphene-1.0.so.0:graphene_vec4_get_type
 libgraphene-1.0.so.0:graphene_vec4_get_w
 libgraphene-1.0.so.0:graphene_vec4_get_x
 libgraphene-1.0.so.0:graphene_vec4_get_xy

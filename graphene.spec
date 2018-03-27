@@ -4,13 +4,19 @@
 #
 Name     : graphene
 Version  : 1.8.0
-Release  : 3
+Release  : 4
 URL      : https://download.gnome.org/sources/graphene/1.8/graphene-1.8.0.tar.xz
 Source0  : https://download.gnome.org/sources/graphene/1.8/graphene-1.8.0.tar.xz
 Summary  : Math classes for graphic libraries
 Group    : Development/Tools
 License  : MIT
+Requires: graphene-data
 Requires: graphene-lib
+Requires: graphene-bin
+BuildRequires : glib-dev
+BuildRequires : glibc-bin
+BuildRequires : gobject-introspection
+BuildRequires : gobject-introspection-dev
 BuildRequires : meson
 BuildRequires : ninja
 BuildRequires : python3
@@ -21,10 +27,29 @@ BuildRequires : python3
 [![Build Status](https://travis-ci.org/ebassi/graphene.svg?branch=master)](https://travis-ci.org/ebassi/graphene)
 [![Build status](https://ci.appveyor.com/api/projects/status/pw7o5grgko1l06hd/branch/master?svg=true)](https://ci.appveyor.com/project/ebassi/graphene/branch/master)
 
+%package bin
+Summary: bin components for the graphene package.
+Group: Binaries
+Requires: graphene-data
+
+%description bin
+bin components for the graphene package.
+
+
+%package data
+Summary: data components for the graphene package.
+Group: Data
+
+%description data
+data components for the graphene package.
+
+
 %package dev
 Summary: dev components for the graphene package.
 Group: Development
 Requires: graphene-lib
+Requires: graphene-bin
+Requires: graphene-data
 Provides: graphene-devel
 
 %description dev
@@ -34,6 +59,7 @@ dev components for the graphene package.
 %package lib
 Summary: lib components for the graphene package.
 Group: Libraries
+Requires: graphene-data
 
 %description lib
 lib components for the graphene package.
@@ -47,7 +73,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1522161655
+export SOURCE_DATE_EPOCH=1522162100
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --prefix /usr --buildtype=plain  builddir
 ninja -v -C builddir
 
@@ -57,11 +83,56 @@ DESTDIR=%{buildroot} ninja -C builddir install
 %files
 %defattr(-,root,root,-)
 
+%files bin
+%defattr(-,root,root,-)
+/usr/libexec/installed-tests/graphene-1.0/box
+/usr/libexec/installed-tests/graphene-1.0/euler
+/usr/libexec/installed-tests/graphene-1.0/frustum
+/usr/libexec/installed-tests/graphene-1.0/matrix
+/usr/libexec/installed-tests/graphene-1.0/plane
+/usr/libexec/installed-tests/graphene-1.0/point
+/usr/libexec/installed-tests/graphene-1.0/point3d
+/usr/libexec/installed-tests/graphene-1.0/quad
+/usr/libexec/installed-tests/graphene-1.0/quaternion
+/usr/libexec/installed-tests/graphene-1.0/ray
+/usr/libexec/installed-tests/graphene-1.0/rect
+/usr/libexec/installed-tests/graphene-1.0/simd
+/usr/libexec/installed-tests/graphene-1.0/size
+/usr/libexec/installed-tests/graphene-1.0/sphere
+/usr/libexec/installed-tests/graphene-1.0/triangle
+/usr/libexec/installed-tests/graphene-1.0/vec2
+/usr/libexec/installed-tests/graphene-1.0/vec3
+/usr/libexec/installed-tests/graphene-1.0/vec4
+
+%files data
+%defattr(-,root,root,-)
+/usr/lib64/girepository-1.0/Graphene-1.0.typelib
+/usr/share/gir-1.0/*.gir
+/usr/share/installed-tests/graphene-1.0/box.test
+/usr/share/installed-tests/graphene-1.0/euler.test
+/usr/share/installed-tests/graphene-1.0/frustum.test
+/usr/share/installed-tests/graphene-1.0/matrix.test
+/usr/share/installed-tests/graphene-1.0/plane.test
+/usr/share/installed-tests/graphene-1.0/point.test
+/usr/share/installed-tests/graphene-1.0/point3d.test
+/usr/share/installed-tests/graphene-1.0/quad.test
+/usr/share/installed-tests/graphene-1.0/quaternion.test
+/usr/share/installed-tests/graphene-1.0/ray.test
+/usr/share/installed-tests/graphene-1.0/rect.test
+/usr/share/installed-tests/graphene-1.0/simd.test
+/usr/share/installed-tests/graphene-1.0/size.test
+/usr/share/installed-tests/graphene-1.0/sphere.test
+/usr/share/installed-tests/graphene-1.0/triangle.test
+/usr/share/installed-tests/graphene-1.0/vec2.test
+/usr/share/installed-tests/graphene-1.0/vec3.test
+/usr/share/installed-tests/graphene-1.0/vec4.test
+
 %files dev
 %defattr(-,root,root,-)
 /usr/include/graphene-1.0/graphene-box.h
 /usr/include/graphene-1.0/graphene-euler.h
 /usr/include/graphene-1.0/graphene-frustum.h
+/usr/include/graphene-1.0/graphene-gobject.h
 /usr/include/graphene-1.0/graphene-macros.h
 /usr/include/graphene-1.0/graphene-matrix.h
 /usr/include/graphene-1.0/graphene-plane.h
@@ -86,6 +157,7 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/lib64/graphene-1.0/include/graphene-config.h
 /usr/lib64/libgraphene-1.0.so
 /usr/lib64/pkgconfig/graphene-1.0.pc
+/usr/lib64/pkgconfig/graphene-gobject-1.0.pc
 
 %files lib
 %defattr(-,root,root,-)
