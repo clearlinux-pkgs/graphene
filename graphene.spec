@@ -4,7 +4,7 @@
 #
 Name     : graphene
 Version  : 1.8.0
-Release  : 5
+Release  : 6
 URL      : https://download.gnome.org/sources/graphene/1.8/graphene-1.8.0.tar.xz
 Source0  : https://download.gnome.org/sources/graphene/1.8/graphene-1.8.0.tar.xz
 Summary  : Math classes for graphic libraries
