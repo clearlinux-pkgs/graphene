@@ -1,0 +1,35 @@
+From cc5586603c6ea8f00e0cda9dcbe579e605823678 Mon Sep 17 00:00:00 2001
+From: Ross Burton <ross.burton@intel.com>
+Date: Thu, 2 Apr 2020 14:10:35 +0100
+Subject: [PATCH] tests: installed tests should use TAP
+
+The GNOME installed tests system expects the test output to be TAP:
+
+"The key Output (if specified) can only take one value at present, which is TAP. This specifies that the test outputs Test Anything Protocol."
+(https://wiki.gnome.org/Initiatives/GnomeGoals/InstalledTests)
+
+Export MUTEST_OUTPUT=tap so this is the case.
+---
+ tests/gen-installed-test.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/tests/gen-installed-test.py b/tests/gen-installed-test.py
+index 6d5942d..03130ea 100644
+--- a/tests/gen-installed-test.py
++++ b/tests/gen-installed-test.py
+@@ -29,7 +29,11 @@ def write_template(filename, data):
+         f.write(data)
+ 
+ def build_template(testdir, testname):
+-    return "[Test]\nType=session\nExec={}\n".format(os.path.join(testdir, testname))
++    return """[Test]
++Type=session
++Exec={}
++TestEnvironment=MUTEST_OUTPUT=tap;
++""".format(os.path.join(testdir, testname))
+ 
+ argparser = argparse.ArgumentParser(description='Generate installed-test data.')
+ argparser.add_argument('--testdir', metavar='dir', required=True, help='Installed test directory')
+-- 
+2.26.0
+
