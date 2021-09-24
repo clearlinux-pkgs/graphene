@@ -4,12 +4,12 @@
 #
 Name     : graphene
 Version  : 1.10.6
-Release  : 16
+Release  : 17
 URL      : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.6.tar.xz
 Source0  : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.6.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : BSD-3-Clause MIT
+License  : BSD-2-Clause BSD-3-Clause MIT
 Requires: graphene-data = %{version}-%{release}
 Requires: graphene-lib = %{version}-%{release}
 Requires: graphene-license = %{version}-%{release}
@@ -79,23 +79,28 @@ tests components for the graphene package.
 %prep
 %setup -q -n graphene-1.10.6
 cd %{_builddir}/graphene-1.10.6
+pushd ..
+cp -a graphene-1.10.6 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1618930053
+export SOURCE_DATE_EPOCH=1632520364
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
 ninja -v -C builddir
+CFLAGS="$CFLAGS -m64 -march=haswell" CXXFLAGS="$CXXFLAGS -m64 -march=haswell " LDFLAGS="$LDFLAGS -m64 -march=haswell" meson --libdir=lib64/haswell --prefix=/usr --buildtype=plain   builddiravx2
+ninja -v -C builddiravx2
 
 %check
 export LANG=C.UTF-8
@@ -109,10 +114,12 @@ mkdir -p %{buildroot}/usr/share/package-licenses/graphene
 cp %{_builddir}/graphene-1.10.6/LICENSE.txt %{buildroot}/usr/share/package-licenses/graphene/53ca621a56a9ded7d6ba2f3e608a43515875783b
 cp %{_builddir}/graphene-1.10.6/subprojects/mutest/LICENSE.txt %{buildroot}/usr/share/package-licenses/graphene/13869509cd8e339104f92084c841c24a72ca2034
 cp %{_builddir}/graphene-1.10.6/subprojects/mutest/docs/LICENSE.markdeep.txt %{buildroot}/usr/share/package-licenses/graphene/25997556cbd0a4d064057d267c81c8d8b60e7be4
+DESTDIR=%{buildroot} ninja -C builddiravx2 install
 DESTDIR=%{buildroot} ninja -C builddir install
 
 %files
 %defattr(-,root,root,-)
+/usr/lib64/haswell/girepository-1.0/Graphene-1.0.typelib
 
 %files data
 %defattr(-,root,root,-)
@@ -147,12 +154,18 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/include/graphene-1.0/graphene-version.h
 /usr/include/graphene-1.0/graphene.h
 /usr/lib64/graphene-1.0/include/graphene-config.h
+/usr/lib64/haswell/graphene-1.0/include/graphene-config.h
+/usr/lib64/haswell/libgraphene-1.0.so
+/usr/lib64/haswell/pkgconfig/graphene-1.0.pc
+/usr/lib64/haswell/pkgconfig/graphene-gobject-1.0.pc
 /usr/lib64/libgraphene-1.0.so
 /usr/lib64/pkgconfig/graphene-1.0.pc
 /usr/lib64/pkgconfig/graphene-gobject-1.0.pc
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/haswell/libgraphene-1.0.so.0
+/usr/lib64/haswell/libgraphene-1.0.so.0.1000.6
 /usr/lib64/libgraphene-1.0.so.0
 /usr/lib64/libgraphene-1.0.so.0.1000.6
 
