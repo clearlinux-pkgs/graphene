@@ -4,14 +4,16 @@
 #
 Name     : graphene
 Version  : 1.10.6
-Release  : 17
+Release  : 18
 URL      : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.6.tar.xz
 Source0  : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.6.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause MIT
 Requires: graphene-data = %{version}-%{release}
+Requires: graphene-filemap = %{version}-%{release}
 Requires: graphene-lib = %{version}-%{release}
+Requires: graphene-libexec = %{version}-%{release}
 Requires: graphene-license = %{version}-%{release}
 BuildRequires : buildreq-gnome
 BuildRequires : buildreq-meson
@@ -49,14 +51,34 @@ Requires: graphene = %{version}-%{release}
 dev components for the graphene package.
 
 
+%package filemap
+Summary: filemap components for the graphene package.
+Group: Default
+
+%description filemap
+filemap components for the graphene package.
+
+
 %package lib
 Summary: lib components for the graphene package.
 Group: Libraries
 Requires: graphene-data = %{version}-%{release}
+Requires: graphene-libexec = %{version}-%{release}
 Requires: graphene-license = %{version}-%{release}
+Requires: graphene-filemap = %{version}-%{release}
 
 %description lib
 lib components for the graphene package.
+
+
+%package libexec
+Summary: libexec components for the graphene package.
+Group: Default
+Requires: graphene-license = %{version}-%{release}
+Requires: graphene-filemap = %{version}-%{release}
+
+%description libexec
+libexec components for the graphene package.
 
 
 %package license
@@ -88,7 +110,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1632520364
+export SOURCE_DATE_EPOCH=1633752642
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -99,7 +121,7 @@ export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=a
 export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -ffat-lto-objects -flto=auto -fno-semantic-interposition -mprefer-vector-width=256 "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
 ninja -v -C builddir
-CFLAGS="$CFLAGS -m64 -march=haswell" CXXFLAGS="$CXXFLAGS -m64 -march=haswell " LDFLAGS="$LDFLAGS -m64 -march=haswell" meson --libdir=lib64/haswell --prefix=/usr --buildtype=plain   builddiravx2
+CFLAGS="$CFLAGS -m64 -march=x86-64-v3" CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 " LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddiravx2
 ninja -v -C builddiravx2
 
 %check
@@ -107,19 +129,19 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-meson test -C builddir
+meson test -C builddir --print-errorlogs
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/graphene
 cp %{_builddir}/graphene-1.10.6/LICENSE.txt %{buildroot}/usr/share/package-licenses/graphene/53ca621a56a9ded7d6ba2f3e608a43515875783b
 cp %{_builddir}/graphene-1.10.6/subprojects/mutest/LICENSE.txt %{buildroot}/usr/share/package-licenses/graphene/13869509cd8e339104f92084c841c24a72ca2034
 cp %{_builddir}/graphene-1.10.6/subprojects/mutest/docs/LICENSE.markdeep.txt %{buildroot}/usr/share/package-licenses/graphene/25997556cbd0a4d064057d267c81c8d8b60e7be4
-DESTDIR=%{buildroot} ninja -C builddiravx2 install
+DESTDIR=%{buildroot}-v3 ninja -C builddiravx2 install
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 DESTDIR=%{buildroot} ninja -C builddir install
 
 %files
 %defattr(-,root,root,-)
-/usr/lib64/haswell/girepository-1.0/Graphene-1.0.typelib
 
 %files data
 %defattr(-,root,root,-)
@@ -154,20 +176,23 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/include/graphene-1.0/graphene-version.h
 /usr/include/graphene-1.0/graphene.h
 /usr/lib64/graphene-1.0/include/graphene-config.h
-/usr/lib64/haswell/graphene-1.0/include/graphene-config.h
-/usr/lib64/haswell/libgraphene-1.0.so
-/usr/lib64/haswell/pkgconfig/graphene-1.0.pc
-/usr/lib64/haswell/pkgconfig/graphene-gobject-1.0.pc
 /usr/lib64/libgraphene-1.0.so
 /usr/lib64/pkgconfig/graphene-1.0.pc
 /usr/lib64/pkgconfig/graphene-gobject-1.0.pc
 
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-graphene
+
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/haswell/libgraphene-1.0.so.0
-/usr/lib64/haswell/libgraphene-1.0.so.0.1000.6
 /usr/lib64/libgraphene-1.0.so.0
 /usr/lib64/libgraphene-1.0.so.0.1000.6
+/usr/share/clear/optimized-elf/lib*
+
+%files libexec
+%defattr(-,root,root,-)
+/usr/share/clear/optimized-elf/exec*
 
 %files license
 %defattr(0644,root,root,0755)
