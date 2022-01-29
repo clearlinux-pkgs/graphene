@@ -4,7 +4,7 @@
 #
 Name     : graphene
 Version  : 1.10.6
-Release  : 19
+Release  : 20
 URL      : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.6.tar.xz
 Source0  : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.6.tar.xz
 Summary  : No detailed summary available
