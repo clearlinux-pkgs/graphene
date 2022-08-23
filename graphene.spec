@@ -4,7 +4,7 @@
 #
 Name     : graphene
 Version  : 1.10.8
-Release  : 26
+Release  : 27
 URL      : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.8.tar.xz
 Source0  : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.8.tar.xz
 Summary  : No detailed summary available
