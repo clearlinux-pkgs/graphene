@@ -5,14 +5,13 @@
 #
 Name     : graphene
 Version  : 1.10.8
-Release  : 33
+Release  : 34
 URL      : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.8.tar.xz
 Source0  : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.8.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause BSD-3-Clause MIT
 Requires: graphene-data = %{version}-%{release}
-Requires: graphene-filemap = %{version}-%{release}
 Requires: graphene-lib = %{version}-%{release}
 Requires: graphene-license = %{version}-%{release}
 BuildRequires : buildreq-gnome
@@ -54,20 +53,11 @@ Requires: graphene = %{version}-%{release}
 dev components for the graphene package.
 
 
-%package filemap
-Summary: filemap components for the graphene package.
-Group: Default
-
-%description filemap
-filemap components for the graphene package.
-
-
 %package lib
 Summary: lib components for the graphene package.
 Group: Libraries
 Requires: graphene-data = %{version}-%{release}
 Requires: graphene-license = %{version}-%{release}
-Requires: graphene-filemap = %{version}-%{release}
 
 %description lib
 lib components for the graphene package.
@@ -102,15 +92,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680033027
+export SOURCE_DATE_EPOCH=1682975641
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
 ninja -v -C builddir
 CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -O3" CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 " LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddiravx2
@@ -142,6 +132,7 @@ DESTDIR=%{buildroot} ninja -C builddir install
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libgraphene-1.0.so
 /usr/include/graphene-1.0/graphene-box.h
 /usr/include/graphene-1.0/graphene-euler.h
 /usr/include/graphene-1.0/graphene-frustum.h
@@ -167,20 +158,15 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/include/graphene-1.0/graphene-version-macros.h
 /usr/include/graphene-1.0/graphene-version.h
 /usr/include/graphene-1.0/graphene.h
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgraphene-1.0.so
 /usr/lib64/graphene-1.0/include/graphene-config.h
 /usr/lib64/libgraphene-1.0.so
 /usr/lib64/pkgconfig/graphene-1.0.pc
 /usr/lib64/pkgconfig/graphene-gobject-1.0.pc
 
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-graphene
-
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgraphene-1.0.so.0
-/usr/lib64/glibc-hwcaps/x86-64-v3/libgraphene-1.0.so.0.1000.8
+/V3/usr/lib64/libgraphene-1.0.so.0
+/V3/usr/lib64/libgraphene-1.0.so.0.1000.8
 /usr/lib64/libgraphene-1.0.so.0
 /usr/lib64/libgraphene-1.0.so.0.1000.8
 
@@ -192,6 +178,24 @@ DESTDIR=%{buildroot} ninja -C builddir install
 
 %files tests
 %defattr(-,root,root,-)
+/V3/usr/libexec/installed-tests/graphene-1.0/box
+/V3/usr/libexec/installed-tests/graphene-1.0/euler
+/V3/usr/libexec/installed-tests/graphene-1.0/frustum
+/V3/usr/libexec/installed-tests/graphene-1.0/matrix
+/V3/usr/libexec/installed-tests/graphene-1.0/plane
+/V3/usr/libexec/installed-tests/graphene-1.0/point
+/V3/usr/libexec/installed-tests/graphene-1.0/point3d
+/V3/usr/libexec/installed-tests/graphene-1.0/quad
+/V3/usr/libexec/installed-tests/graphene-1.0/quaternion
+/V3/usr/libexec/installed-tests/graphene-1.0/ray
+/V3/usr/libexec/installed-tests/graphene-1.0/rect
+/V3/usr/libexec/installed-tests/graphene-1.0/simd
+/V3/usr/libexec/installed-tests/graphene-1.0/size
+/V3/usr/libexec/installed-tests/graphene-1.0/sphere
+/V3/usr/libexec/installed-tests/graphene-1.0/triangle
+/V3/usr/libexec/installed-tests/graphene-1.0/vec2
+/V3/usr/libexec/installed-tests/graphene-1.0/vec3
+/V3/usr/libexec/installed-tests/graphene-1.0/vec4
 /usr/libexec/installed-tests/graphene-1.0/box
 /usr/libexec/installed-tests/graphene-1.0/euler
 /usr/libexec/installed-tests/graphene-1.0/frustum
@@ -211,7 +215,6 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/libexec/installed-tests/graphene-1.0/vec2
 /usr/libexec/installed-tests/graphene-1.0/vec3
 /usr/libexec/installed-tests/graphene-1.0/vec4
-/usr/share/clear/optimized-elf/test*
 /usr/share/installed-tests/graphene-1.0/box.test
 /usr/share/installed-tests/graphene-1.0/euler.test
 /usr/share/installed-tests/graphene-1.0/frustum.test
