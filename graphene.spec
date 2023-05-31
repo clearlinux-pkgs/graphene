@@ -5,7 +5,7 @@
 #
 Name     : graphene
 Version  : 1.10.8
-Release  : 34
+Release  : 35
 URL      : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.8.tar.xz
 Source0  : https://download.gnome.org/sources/graphene/1.10/graphene-1.10.8.tar.xz
 Summary  : No detailed summary available
@@ -92,7 +92,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682975641
+export SOURCE_DATE_EPOCH=1685543815
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -132,7 +132,6 @@ DESTDIR=%{buildroot} ninja -C builddir install
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libgraphene-1.0.so
 /usr/include/graphene-1.0/graphene-box.h
 /usr/include/graphene-1.0/graphene-euler.h
 /usr/include/graphene-1.0/graphene-frustum.h
@@ -165,7 +164,6 @@ DESTDIR=%{buildroot} ninja -C builddir install
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libgraphene-1.0.so.0
 /V3/usr/lib64/libgraphene-1.0.so.0.1000.8
 /usr/lib64/libgraphene-1.0.so.0
 /usr/lib64/libgraphene-1.0.so.0.1000.8
